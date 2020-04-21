@@ -1,0 +1,23 @@
+<div class="card m-3">
+    <h5 class="card-header">Batch Editing with Kendo UI Grid for Angular</h5>
+    <div class="card-body">
+        <kendo-grid #grid [data]="products">
+            <ng-template *ngIf="!isEditMode" kendoGridToolbarTemplate>
+                <button (click)="onEdit()" class="k-button k-primary">Edit</button>
+            </ng-template>
+            <ng-template *ngIf="isEditMode" kendoGridToolbarTemplate>
+                <button (click)="onAdd()" class="k-button">Add</button>
+                <button (click)="onSave()" class="k-button">Save</button>
+                <button (click)="onCancel()" class="k-button">Cancel</button>
+            </ng-template>
+            <kendo-grid-column field="Name"></kendo-grid-column>
+            <kendo-grid-column field="Price" editor="numeric" format="{0:c}"></kendo-grid-column>
+            <kendo-grid-column field="InStock" title="In Stock" editor="boolean"></kendo-grid-column>
+            <kendo-grid-column *ngIf="isEditMode">
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    <button (click)="onRemove(rowIndex)" class="k-button">Remove</button>
+                </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+</div>
